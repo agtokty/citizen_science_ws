@@ -11,10 +11,10 @@ var checkSingleObservation = function (observation) {
     observation.property = observation.property || null;
     observation.recorded_at = observation.recorded_at;
     observation.measurement = observation.measurement || undefined;
-    observation.measurement_text = observation.measurement_text || null;
     observation.note = observation.note || null;
     observation.is_valid = (observation.is_active == true || observation.is_active == false) ? observation.is_active : true;
     observation.usercode = observation.usercode || null;
+    observation.username = observation.username || null;
 
     return observation;
 }

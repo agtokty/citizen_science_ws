@@ -39,8 +39,8 @@ function getSingleObservation(code, cb) {
 }
 
 function insertObservation(data, cb) {
-    database.none('insert into observation(CODE, LOC_DESC, LOC_LAT, LOC_LON, PROPERTY, INSERTED_AT, RECORDED_AT, MEASUREMENT, MEASUREMENT_TEXT, NOTE, IS_VALID, USER_CODE)' +
-        ' values(${code}, ${loc_desc}, ${loc_lat}, ${loc_lon}, ${property}, current_timestamp, ${recorded_at}, ${measurement}, ${measurement_text}, ${note}, ${is_valid}, ${usercode} )'
+    database.none('insert into observation(CODE, LOC_DESC, LOC_LAT, LOC_LON, PROPERTY, INSERTED_AT, RECORDED_AT, MEASUREMENT, USERNAME, NOTE, IS_VALID, USER_CODE)' +
+        ' values(${code}, ${loc_desc}, ${loc_lat}, ${loc_lon}, ${property}, current_timestamp, ${recorded_at}, ${measurement}, ${username}, ${note}, ${is_valid}, ${usercode} )'
         , data)
         .then(function () {
             cb(null, { result: "ok" })
@@ -53,8 +53,8 @@ function insertObservation(data, cb) {
 function insertObservationBulk(data, cb) {
     database.tx(t => {
         var queries = data.map(u => {
-            return t.none('insert into observation(CODE, LOC_DESC, LOC_LAT, LOC_LON, PROPERTY, INSERTED_AT, RECORDED_AT, MEASUREMENT, MEASUREMENT_TEXT, NOTE, IS_VALID, USER_CODE)' +
-                ' values(${code}, ${loc_desc}, ${loc_lat}, ${loc_lon}, ${property}, current_timestamp, ${recorded_at}, ${measurement}, ${measurement_text}, ${note}, ${is_valid}, ${usercode} )', u);
+            return t.none('insert into observation(CODE, LOC_DESC, LOC_LAT, LOC_LON, PROPERTY, INSERTED_AT, RECORDED_AT, MEASUREMENT, USERNAME, NOTE, IS_VALID, USER_CODE)' +
+                ' values(${code}, ${loc_desc}, ${loc_lat}, ${loc_lon}, ${property}, current_timestamp, ${recorded_at}, ${measurement}, ${username}, ${note}, ${is_valid}, ${usercode} )', u);
         });
         return t.batch(queries);
     })
