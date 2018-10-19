@@ -43,7 +43,7 @@ router.post('/observation', function (req, res) {
     if (!observation.property)
         return res.status(400).send({ error: "Ölçüm bilgileri eksik!", detail: "property değeri değeri boş" });
 
-    if (!observation.measurement)
+    if (observation.measurement !=0 && !observation.measurement)
         return res.status(400).send({ error: "Ölçüm değeri eksik!" });
 
     db.insertObservation(observation, function (err, data) {
