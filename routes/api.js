@@ -10,7 +10,10 @@ var checkSingleObservation = function (observation) {
     observation.loc_lon = observation.loc_lon || 0;
     observation.property = observation.property || null;
     observation.recorded_at = observation.recorded_at;
-    observation.measurement = observation.measurement || undefined;
+
+    if(!observation.measurement && observation.measurement != 0)
+        observation.measurement = 0;
+
     observation.note = observation.note || null;
     observation.is_valid = (observation.is_active == true || observation.is_active == false) ? observation.is_active : true;
     observation.usercode = observation.usercode || null;
